@@ -1,52 +1,69 @@
  import { useState } from 'react';
 
    function Contact() {
-     const [formData, setFormData] = useState({
-       name: '',
-       email: '',
-       message: ''
-     });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-     const handleChange = (e) => {
-       setFormData({ ...formData, [e.target.name]: e.target.value });
-     };
+  const containerStyle = {
+    padding: '20px',
+    backgroundColor: '#f9f0ff',
+    fontFamily: 'Tahoma, sans-serif',
+    color: '#4a004a'
+  };
 
-     const handleSubmit = (e) => {
-       e.preventDefault();
-       alert('Form submitted!');
-     };
+  const inputStyle = {
+    display: 'block',
+    margin: '10px 0',
+    padding: '8px',
+    width: '100%',
+    maxWidth: '400px'
+  };
 
-     return (
-       <div style={{ padding: '20px' }}>
-         <h1>Contact Us</h1>
-         <form onSubmit={handleSubmit}>
-           <input
-             type="text"
-             name="name"
-             placeholder="Your Name"
-             value={formData.name}
-             onChange={handleChange}
-             style={{ display: 'block', margin: '10px 0' }}
-           />
-           <input
-             type="email"
-             name="email"
-             placeholder="Your Email"
-             value={formData.email}
-             onChange={handleChange}
-             style={{ display: 'block', margin: '10px 0' }}
-           />
-           <textarea
-             name="message"
-             placeholder="Your Message"
-             value={formData.message}
-             onChange={handleChange}
-             style={{ display: 'block', margin: '10px 0' }}
-           />
-           <button type="submit">Send Message</button>
-         </form>
-       </div>
-     );
-   }
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-   export default Contact;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Form submitted!');
+  };
+
+  return (
+    <div style={containerStyle}>
+      <h1>Contact Us</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          style={inputStyle}
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <input
+          style={inputStyle}
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <textarea
+          style={inputStyle}
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+        />
+        <button type="submit" style={{ ...inputStyle, backgroundColor: '#660066', color: 'white', cursor: 'pointer' }}>
+          Send Message
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default Contact;
