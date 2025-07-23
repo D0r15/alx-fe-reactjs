@@ -6,6 +6,7 @@ function Navbar() {
       margin: '0px, 10px',
       padding: '10px 0px',
       backgroundColor: 'purple',
+      justifyContent: 'space-between', 
       color: 'white',
       display: 'flex',
       gap: '15px',
