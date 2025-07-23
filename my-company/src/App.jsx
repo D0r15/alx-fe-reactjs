@@ -12,15 +12,16 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/components" element={<Home />} />
-          <Route path="/components/about" element={<About />} />
-          <Route path="/components/services" element={<Services />} />
-          <Route path="/components/contact" element={<Contact />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
+
 
 export default App;
 
