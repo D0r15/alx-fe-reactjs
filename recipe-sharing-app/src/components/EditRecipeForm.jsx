@@ -1,33 +1,36 @@
-import useState from 'react';
+import { useState } from 'react';
 import useRecipeStore from './recipeStore';
 
-const EditRecipeForm = ({ recipe }) => {
+const EditRecipeForm = ({ recipe, onClose }) => {
+  const updateRecipe = useRecipeStore(state => state.updateRecipe);
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
-  const updateRecipe = useRecipeStore(state => state.updateRecipe);
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
     updateRecipe({ ...recipe, title, description });
+    if (onClose) onClose(); 
   };
 
   return (
-    <form onSubmit={handleUpdate} className="mb-4">
-      <h3 className="text-lg font-semibold mb-2">Edit Recipe</h3>
+    <form onSubmit={handleSubmit} className="space-y-2 mt-4">
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="block mb-2 border p-1 w-full"
         placeholder="Title"
+        className="border p-2 w-full"
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        className="block mb-2 border p-1 w-full"
         placeholder="Description"
+        className="border p-2 w-full"
       />
-      <button type="submit" className="bg-blue-500 text-white px-3 py-1 rounded">
+      <button
+        type="submit"
+        className="bg-green-500 text-white px-4 py-2 rounded"
+      >
         Save Changes
       </button>
     </form>
