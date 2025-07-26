@@ -1,30 +1,31 @@
-
-import create from 'zustand';
+import { create } from 'zustand';
 
 const useRecipeStore = create((set) => ({
   recipes: [],
-  
-  // Add a new recipe
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  searchTerm: '',
+  selectedIngredient: '',
+  maxCookingTime: 0,
+  filteredRecipes: [],
 
-  // Delete a recipe by ID
-  deleteRecipe: (id) =>
+  setRecipes: (recipes) => set({ recipes }),
+
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  setSelectedIngredient: (ingredient) => set({ selectedIngredient: ingredient }),
+  setMaxCookingTime: (time) => set({ maxCookingTime: time }),
+
+  filterRecipes: () =>
     set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== id),
-    })),
+      filteredRecipes: state.recipes.filter((recipe) => {
+        const matchesTitle = recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase());
+        const matchesIngredient = state.selectedIngredient
+          ? recipe.ingredients.includes(state.selectedIngredient)
+          : true;
+        const matchesTime =
+          state.maxCookingTime > 0 ? recipe.cookingTime <= state.maxCookingTime : true;
 
-  // Update a recipe by ID
-  updateRecipe: (updatedRecipe) =>
-    set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
-      ),
+        return matchesTitle && matchesIngredient && matchesTime;
+      }),
     })),
-
-  // Optional: get a single recipe by ID 
-  getRecipeById: (id) =>
-    get().recipes.find((recipe) => recipe.id === id),
 }));
 
 export default useRecipeStore;
