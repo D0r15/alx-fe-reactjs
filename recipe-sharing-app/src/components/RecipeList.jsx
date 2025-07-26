@@ -1,4 +1,5 @@
- import React from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom'; 
 import useRecipeStore from './recipeStore';
 
 const RecipeList = () => {
@@ -11,14 +12,15 @@ const RecipeList = () => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {filteredRecipes.map((recipe) => (
-        <div
+        <Link
+          to={`/recipes/${recipe.id}`}
           key={recipe.id}
-          className="p-4 border rounded-md shadow hover:shadow-lg transition"
+          className="block p-4 border rounded-md shadow hover:shadow-lg transition"
         >
           <h3 className="text-lg font-semibold mb-1">{recipe.title}</h3>
           <p className="text-sm text-gray-600 mb-1">Time: {recipe.cookingTime} mins</p>
           <p className="text-sm text-gray-600">Ingredients: {recipe.ingredients.join(', ')}</p>
-        </div>
+        </Link>
       ))}
     </div>
   );
