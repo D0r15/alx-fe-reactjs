@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useRecipeStore from './recipeStore';
+import recipeStore from './recipeStore';
 
 const SearchBar = () => {
   const {
@@ -10,7 +10,8 @@ const SearchBar = () => {
     maxCookingTime,
     setMaxCookingTime,
     filterRecipes,
-  } = useRecipeStore();
+    favourites,
+  } = recipeStore();
 
   useEffect(() => {
     filterRecipes();
