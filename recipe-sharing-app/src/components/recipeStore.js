@@ -15,6 +15,26 @@ const useRecipeStore = create((set) => ({
   setSelectedIngredient: (ingredient) => set({ selectedIngredient: ingredient }),
   setMaxCookingTime: (time) => set({ maxCookingTime: time }),
 
+  // Add new recipe
+  addRecipe: (newRecipe) =>
+    set((state) => ({
+      recipes: [...state.recipes, newRecipe],
+    })),
+
+  // Update existing recipe by ID
+  updateRecipe: (updatedRecipe) =>
+    set((state) => ({
+      recipes: state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      ),
+    })),
+
+  // Delete recipe by ID
+  deleteRecipe: (id) =>
+    set((state) => ({
+      recipes: state.recipes.filter((recipe) => recipe.id !== id),
+    })),
+
   // Filtering logic
   filterRecipes: () =>
     set((state) => ({
